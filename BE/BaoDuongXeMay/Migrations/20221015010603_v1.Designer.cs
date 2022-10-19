@@ -4,14 +4,16 @@ using BaoDuongXeMay.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaoDuongXeMay.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221015010603_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,33 +51,6 @@ namespace BaoDuongXeMay.Migrations
                     b.ToTable("CategoryVehicles");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.DetailVehicle_User", b =>
-                {
-                    b.Property<Guid>("IDDeatil")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IDDetailNAU")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<float>("KM_Current")
-                        .HasColumnType("real");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("VehicleID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("IDDeatil");
-
-                    b.HasIndex("UserID");
-
-                    b.HasIndex("VehicleID");
-
-                    b.ToTable("DetailVehicle_User");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.DetaillNAU", b =>
                 {
                     b.Property<Guid>("IDDetailNAU")
@@ -109,33 +84,6 @@ namespace BaoDuongXeMay.Migrations
                     b.HasIndex("VehicleID");
 
                     b.ToTable("DetailNAU");
-                });
-
-            modelBuilder.Entity("BaoDuongXeMay.Data.History", b =>
-                {
-                    b.Property<Guid>("IdHistory")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IDDeatil")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IDDetailNAU")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("RepairDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("TotalCost")
-                        .HasColumnType("real");
-
-                    b.HasKey("IdHistory");
-
-                    b.HasIndex("IDDeatil");
-
-                    b.HasIndex("IDDetailNAU");
-
-                    b.ToTable("History");
                 });
 
             modelBuilder.Entity("BaoDuongXeMay.Data.Unit", b =>
@@ -207,27 +155,6 @@ namespace BaoDuongXeMay.Migrations
                     b.ToTable("Vehicle");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.DetailVehicle_User", b =>
-                {
-                    b.HasOne("BaoDuongXeMay.Data.User", "User")
-                        .WithMany("DetailVehicle_Users")
-                        .HasForeignKey("UserID")
-                        .HasConstraintName("FK_User_DetailVehicleUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BaoDuongXeMay.Data.Vehicle", "Vehicle")
-                        .WithMany("DetailVehicle_Users")
-                        .HasForeignKey("VehicleID")
-                        .HasConstraintName("FK_Vehicle_DetailVehicleUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-
-                    b.Navigation("Vehicle");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.DetaillNAU", b =>
                 {
                     b.HasOne("BaoDuongXeMay.Data.Accessary", "Accessary")
@@ -258,27 +185,6 @@ namespace BaoDuongXeMay.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.History", b =>
-                {
-                    b.HasOne("BaoDuongXeMay.Data.DetailVehicle_User", "DetailVehicle_User")
-                        .WithMany("Histories")
-                        .HasForeignKey("IDDeatil")
-                        .HasConstraintName("FK_DetailVehicleUser_Histories")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BaoDuongXeMay.Data.DetaillNAU", "DetaillNAU")
-                        .WithMany("Histories")
-                        .HasForeignKey("IDDetailNAU")
-                        .HasConstraintName("FK_DetaillNAU_Histories")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DetaillNAU");
-
-                    b.Navigation("DetailVehicle_User");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.Vehicle", b =>
                 {
                     b.HasOne("BaoDuongXeMay.Data.CategoryVehicle", "CategoryVehicle")
@@ -298,31 +204,14 @@ namespace BaoDuongXeMay.Migrations
                     b.Navigation("Vehicles");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.DetailVehicle_User", b =>
-                {
-                    b.Navigation("Histories");
-                });
-
-            modelBuilder.Entity("BaoDuongXeMay.Data.DetaillNAU", b =>
-                {
-                    b.Navigation("Histories");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.Unit", b =>
                 {
                     b.Navigation("DetailNaus");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.User", b =>
-                {
-                    b.Navigation("DetailVehicle_Users");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.Vehicle", b =>
                 {
                     b.Navigation("DetailNaus");
-
-                    b.Navigation("DetailVehicle_Users");
                 });
 #pragma warning restore 612, 618
         }

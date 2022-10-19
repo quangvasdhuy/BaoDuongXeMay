@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nFNI6bkVIp4nLsLAgP49TVRyUYW4e7hpaVu37g+f2n70orLfTQqyQWvEuCd0oOO5PbWVYt3lF1pAi30e0FLMvQ==",
+  "dgSpecHash": "m5526gWVbcgp4m3BxthMfOsOg6V1m137R/E0DOYwpuePsTYeDFCBs7D1iVWTgm3Lad3RFEEX2gCCzwiEw8Mcrg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\doanq\\source\\repos\\BaoDuongXeMay\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
+  "projectFilePath": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\doanq\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\doanq\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.10\\microsoft.aspnetcore.authentication.jwtbearer.5.0.10.nupkg.sha512",

@@ -4,14 +4,16 @@ using BaoDuongXeMay.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaoDuongXeMay.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221015014108_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,11 +57,17 @@ namespace BaoDuongXeMay.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("DetaillNAUIDDetailNAU")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IDDetailNAU")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<float>("KM_Current")
                         .HasColumnType("real");
+
+                    b.Property<DateTime>("RepairDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -68,6 +76,8 @@ namespace BaoDuongXeMay.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IDDeatil");
+
+                    b.HasIndex("DetaillNAUIDDetailNAU");
 
                     b.HasIndex("UserID");
 
@@ -109,33 +119,6 @@ namespace BaoDuongXeMay.Migrations
                     b.HasIndex("VehicleID");
 
                     b.ToTable("DetailNAU");
-                });
-
-            modelBuilder.Entity("BaoDuongXeMay.Data.History", b =>
-                {
-                    b.Property<Guid>("IdHistory")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IDDeatil")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IDDetailNAU")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("RepairDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("TotalCost")
-                        .HasColumnType("real");
-
-                    b.HasKey("IdHistory");
-
-                    b.HasIndex("IDDeatil");
-
-                    b.HasIndex("IDDetailNAU");
-
-                    b.ToTable("History");
                 });
 
             modelBuilder.Entity("BaoDuongXeMay.Data.Unit", b =>
@@ -209,6 +192,10 @@ namespace BaoDuongXeMay.Migrations
 
             modelBuilder.Entity("BaoDuongXeMay.Data.DetailVehicle_User", b =>
                 {
+                    b.HasOne("BaoDuongXeMay.Data.DetaillNAU", "DetaillNAU")
+                        .WithMany()
+                        .HasForeignKey("DetaillNAUIDDetailNAU");
+
                     b.HasOne("BaoDuongXeMay.Data.User", "User")
                         .WithMany("DetailVehicle_Users")
                         .HasForeignKey("UserID")
@@ -222,6 +209,8 @@ namespace BaoDuongXeMay.Migrations
                         .HasConstraintName("FK_Vehicle_DetailVehicleUser")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DetaillNAU");
 
                     b.Navigation("User");
 
@@ -258,27 +247,6 @@ namespace BaoDuongXeMay.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.History", b =>
-                {
-                    b.HasOne("BaoDuongXeMay.Data.DetailVehicle_User", "DetailVehicle_User")
-                        .WithMany("Histories")
-                        .HasForeignKey("IDDeatil")
-                        .HasConstraintName("FK_DetailVehicleUser_Histories")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BaoDuongXeMay.Data.DetaillNAU", "DetaillNAU")
-                        .WithMany("Histories")
-                        .HasForeignKey("IDDetailNAU")
-                        .HasConstraintName("FK_DetaillNAU_Histories")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DetaillNAU");
-
-                    b.Navigation("DetailVehicle_User");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.Vehicle", b =>
                 {
                     b.HasOne("BaoDuongXeMay.Data.CategoryVehicle", "CategoryVehicle")
@@ -296,16 +264,6 @@ namespace BaoDuongXeMay.Migrations
             modelBuilder.Entity("BaoDuongXeMay.Data.CategoryVehicle", b =>
                 {
                     b.Navigation("Vehicles");
-                });
-
-            modelBuilder.Entity("BaoDuongXeMay.Data.DetailVehicle_User", b =>
-                {
-                    b.Navigation("Histories");
-                });
-
-            modelBuilder.Entity("BaoDuongXeMay.Data.DetaillNAU", b =>
-                {
-                    b.Navigation("Histories");
                 });
 
             modelBuilder.Entity("BaoDuongXeMay.Data.Unit", b =>

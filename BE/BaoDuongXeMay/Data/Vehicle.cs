@@ -19,9 +19,12 @@ namespace BaoDuongXeMay.Data
         [ForeignKey("CategoryVehicleID")]
         public CategoryVehicle CategoryVehicle { get; set; }
         public ICollection<DetaillNAU> DetailNaus { get; set; }
+        public ICollection<DetailVehicle_User> DetailVehicle_Users { get; set; }
+
         public Vehicle()
         {
             DetailNaus = new List<DetaillNAU>();
+            DetailVehicle_Users = new List<DetailVehicle_User>();
         }
     }
 }

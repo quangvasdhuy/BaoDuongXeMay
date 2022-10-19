@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\doanq\\source\\repos\\BaoDuongXeMay\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {}
+    "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {}
   },
   "projects": {
-    "C:\\Users\\doanq\\source\\repos\\BaoDuongXeMay\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {
+    "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\doanq\\source\\repos\\BaoDuongXeMay\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
+        "projectUniqueName": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
         "projectName": "BaoDuongXeMay",
-        "projectPath": "C:\\Users\\doanq\\source\\repos\\BaoDuongXeMay\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
+        "projectPath": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
         "packagesPath": "C:\\Users\\doanq\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\doanq\\source\\repos\\BaoDuongXeMay\\BaoDuongXeMay\\obj\\",
+        "outputPath": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\doanq\\AppData\\Roaming\\NuGet\\NuGet.Config",

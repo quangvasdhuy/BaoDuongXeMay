@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,12 +11,15 @@ namespace BaoDuongXeMay.Data
         [Key]
         public int UserID { get; set; }
         public string Name { get; set; }
-        [Required]
-        [MaxLength(100)]
         public string Username { get; set; }
         public string Email { get; set; }
-        [Required, MaxLength(250)]
         public string Password { get; set; }
-        
+
+        public ICollection<DetailVehicle_User> DetailVehicle_Users { get; set; }
+
+        public User()
+        {
+            DetailVehicle_Users = new List<DetailVehicle_User>();
+        }
     }
 }

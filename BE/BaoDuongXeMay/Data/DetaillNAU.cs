@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BaoDuongXeMay.Data
 {
     public class DetaillNAU
     {
+        public Guid IDDetailNAU { get; set; }
         public Guid AccessaryID { get; set; }
         public Guid UnitID { get; set; }
         public Guid VehicleID { get; set; }
@@ -15,5 +17,13 @@ namespace BaoDuongXeMay.Data
         public Accessary Accessary { get; set; }
         public Unit Unit { get; set; }
         public Vehicle Vehicle { get; set; }
+
+        public ICollection<History> Histories { get; set; }
+
+        public DetaillNAU()
+        {
+            Histories = new List<History>();
+            
+        }
     }
 }
