@@ -45,6 +45,7 @@ namespace BaoDuongXeMay.Controllers
                 {
                     CategoryVehicleID = new Guid(),
                     CategoryVehicleName = model.CategoryVehicleName,
+                    Image = model.Image,
                 };
                 _context.Add(newItem);
                 _context.SaveChanges();
@@ -63,6 +64,7 @@ namespace BaoDuongXeMay.Controllers
             if (updateById != null)
             {
                 updateById.CategoryVehicleName = model.CategoryVehicleName;
+                updateById.Image = model.Image;
                 _context.SaveChanges();
                 return NoContent();
             }

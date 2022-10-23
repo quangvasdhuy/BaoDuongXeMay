@@ -11,6 +11,7 @@ namespace BaoDuongXeMay.Models
         [MaxLength(255)]
         public string VehicleName { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
 
         public Guid? CategoryVehicleID { get; set; }
     }
@@ -20,7 +21,9 @@ namespace BaoDuongXeMay.Models
         public Guid VehicleId { get; set; }
         public string VehicleName { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
 
         public string CategoryVehicleName { get; set; }
+        
     }
 }

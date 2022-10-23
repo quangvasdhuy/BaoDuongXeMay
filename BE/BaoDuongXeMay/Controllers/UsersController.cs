@@ -54,6 +54,7 @@ namespace BaoDuongXeMay.Controllers
                     Name = model.Name,
                     Password = model.Password,
                     Username = model.Username,
+                    Image = model.Image
                 };
                 _context.Add(newItem);
                 _context.SaveChanges();
@@ -75,6 +76,7 @@ namespace BaoDuongXeMay.Controllers
                 updateById.Password = model.Password;
                 updateById.Email = model.Email;
                 updateById.Username = model.Username;
+                updateById.Image = model.Image;
                 _context.SaveChanges();
                 return NoContent();
             }

@@ -14,6 +14,7 @@ namespace BaoDuongXeMay.Data
         [MaxLength(255)]
         public string VehicleName { get; set; }
         public string Description { get; set; }
+        public string Image { get; set; }
 
         public Guid? CategoryVehicleID { get; set; }
         [ForeignKey("CategoryVehicleID")]

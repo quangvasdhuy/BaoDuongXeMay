@@ -26,6 +26,7 @@ namespace BaoDuongXeMay.Services
                 VehicleId = hh.VehicleID,
                 VehicleName = hh.VehicleName,
                 Description =  hh.Description,
+                Image = hh.Image,
                 CategoryVehicleName = hh.VehicleName
             });
             return result.ToList();

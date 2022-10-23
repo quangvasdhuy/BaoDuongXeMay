@@ -18,7 +18,8 @@ namespace BaoDuongXeMay.Services
         {
             var _loai = new CategoryVehicle
             {
-                CategoryVehicleName = loai.CategoryVehicleName
+                CategoryVehicleName = loai.CategoryVehicleName,
+                Image = loai.Image,
             };
             _context.Add(_loai);
             _context.SaveChanges();
@@ -26,7 +27,8 @@ namespace BaoDuongXeMay.Services
             return new CategoryVehicleVM
             {
                 CategoryVehicleID = _loai.CategoryVehicleID,
-                CategoryVehicleName = _loai.CategoryVehicleName
+                CategoryVehicleName = _loai.CategoryVehicleName, 
+                Image = _loai.Image,
             };
         }
 
@@ -44,7 +46,8 @@ namespace BaoDuongXeMay.Services
         {
             var loais = _context.CategoryVehicles.Select(lo => new CategoryVehicleVM {
                 CategoryVehicleID = lo.CategoryVehicleID,
-                CategoryVehicleName = lo.CategoryVehicleName
+                CategoryVehicleName = lo.CategoryVehicleName,
+                Image = lo.Image
             });
             return loais.ToList();
         }
@@ -56,7 +59,8 @@ namespace BaoDuongXeMay.Services
                 return new CategoryVehicleVM
                 {
                     CategoryVehicleID = loai.CategoryVehicleID,
-                    CategoryVehicleName = loai.CategoryVehicleName
+                    CategoryVehicleName = loai.CategoryVehicleName,
+                    Image = loai.Image
                 };
             }
             return null;
@@ -66,6 +70,7 @@ namespace BaoDuongXeMay.Services
         {
             var _loai = _context.CategoryVehicles.FirstOrDefault(lo => lo.CategoryVehicleID == loai.CategoryVehicleID);
             loai.CategoryVehicleName = _loai.CategoryVehicleName;
+            loai.Image = _loai.Image;
             _context.SaveChanges();
         }
     }

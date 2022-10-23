@@ -10,6 +10,7 @@ namespace BaoDuongXeMay.Data
         public Guid CategoryVehicleID { get; set; }
         [Required]
         public string CategoryVehicleName { get; set; }
+        public string Image { get; set; }
         public virtual ICollection<Vehicle> Vehicles { get; set; }
         
 

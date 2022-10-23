@@ -6,5 +6,6 @@ namespace BaoDuongXeMay.Models
     {
         [Required]
         public string CategoryVehicleName { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -7,5 +7,7 @@ namespace BaoDuongXeMay.Models
         public Guid CategoryVehicleID { get; set; }
         
         public string CategoryVehicleName { get; set; }
+        public string Image { get; set; }
+
     }
 }

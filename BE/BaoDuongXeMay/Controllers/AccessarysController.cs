@@ -47,6 +47,7 @@ namespace BaoDuongXeMay.Controllers
                 {
                     AccessaryID = new Guid(),
                     AccessaryName = model.AccessaryName,
+                    Image = model.Image,
                 };
                 _context.Add(newItem);
                 _context.SaveChanges();
@@ -64,6 +65,7 @@ namespace BaoDuongXeMay.Controllers
             if (updateById != null)
             {
                 updateById.AccessaryName = model.AccessaryName;
+                updateById.Image = model.Image;
                 _context.SaveChanges();
                 return NoContent();
             }

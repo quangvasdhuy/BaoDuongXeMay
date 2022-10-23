@@ -6,5 +6,6 @@ namespace BaoDuongXeMay.Models
     {
         [Required]
         public string AccessaryName { get; set; }
+        public string Image { get; set; }
     }
 }

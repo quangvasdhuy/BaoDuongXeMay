@@ -11,6 +11,7 @@ namespace BaoDuongXeMay.Data
         public Guid AccessaryID { get; set; }
         [Required]
         public string AccessaryName { get; set; }
+        public string Image { get; set; }
         public ICollection<DetaillNAU> DetailNaus { get; set; }
         public Accessary()
         {
