@@ -27,7 +27,7 @@ namespace BaoDuongXeMay.Services
                 VehicleName = hh.VehicleName,
                 Description =  hh.Description,
                 Image = hh.Image,
-                CategoryVehicleName = hh.VehicleName
+                CategoryVehicleName = hh.CategoryVehicle.CategoryVehicleName
             });
             return result.ToList();
         }
