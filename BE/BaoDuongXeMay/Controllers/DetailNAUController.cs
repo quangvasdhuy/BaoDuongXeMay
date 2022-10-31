@@ -1,4 +1,5 @@
-﻿using BaoDuongXeMay.Services;
+﻿using BaoDuongXeMay.Models;
+using BaoDuongXeMay.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,26 +31,39 @@ namespace BaoDuongXeMay.Controllers
             }
         }
 
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(Guid id)
-        //{
-        //    try
-        //    {
-        //        var data = _detailNAURepository.GetByID(id);
-        //        if (data != null)
-        //        {
-        //            return Ok(data);
-        //        }
-        //        else
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
+        [HttpPost]
+        public IActionResult Add(DetailNAUVM loai)
+        {
+            try
+            {
+                return Ok(_detailNAURepository.Add(loai));
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                var data = _detailNAURepository.GetByID(id);
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }

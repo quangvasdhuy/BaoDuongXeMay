@@ -2,9 +2,8 @@
 
 namespace BaoDuongXeMay.Models
 {
-    public class DetailNAUModel
+    public class DetailNAUVM
     {
-        public Guid IDDetailNAU { get; set; }
         public Guid AccessaryID { get; set; }
         public Guid UnitID { get; set; }
         public Guid VehicleID { get; set; }

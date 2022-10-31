@@ -15,6 +15,7 @@ namespace BaoDuongXeMay.Services
         {
             _context = context;
         }
+
         public List<DetailNAUModel> GetAll()
         {
             var loais = _context.DetaillNAUs.Select(lo => new DetailNAUModel
@@ -23,27 +24,56 @@ namespace BaoDuongXeMay.Services
                 Km_Min = lo.Km_Min,
                 Km_Max = lo.Km_Max,
                 CountPerforation = lo.CountPerforation,
-                AccessaryName = lo.Accessary.AccessaryName,
-                UnitName = lo.Unit.UnitName,
-                VehicleName = lo.Vehicle.VehicleName
+                AccessaryID = lo.AccessaryID,
+                UnitID = lo.UnitID,
+                VehicleID = lo.VehicleID
             });
             return loais.ToList();
         }
 
-        //public DetailNAUModel GetByID(Guid id)
-        //{
-        //    //var loai = _context.DetaillNAUs.FirstOrDefault(lo => lo.IDDetailNAU == id);
-        //    //if (loai != null)
-        //    //{
-        //    //    return new DetailNAUModel
-        //    //    {
-        //    //        IDDetailNAU = loai.IDDetailNAU,
-        //    //        Km_Min = loai.Km_Min,
-        //    //        Km_Max = loai.Km_Max,
-        //    //        CountPerforation = loai.CountPerforation,
-        //    //    };
-        //    //}
-        //    return null;
-        //}
+        public DetailNAUModel Add(DetailNAUVM lo)
+        {
+            var _loai = new DetaillNAU
+            {
+                Km_Min = lo.Km_Min,
+                Km_Max = lo.Km_Max,
+                CountPerforation = lo.CountPerforation,
+                AccessaryID = lo.AccessaryID,
+                UnitID = lo.UnitID,
+                VehicleID = lo.VehicleID
+            };
+            _context.Add(_loai);
+            _context.SaveChanges();
+
+            return new DetailNAUModel
+            {
+                IDDetailNAU = _loai.IDDetailNAU,
+                Km_Min = _loai.Km_Min,
+                Km_Max = _loai.Km_Max,
+                CountPerforation = _loai.CountPerforation,
+                AccessaryID = _loai.AccessaryID,
+                UnitID = _loai.UnitID,
+                VehicleID = _loai.VehicleID
+            };
+        }
+
+        public DetailNAUModel GetByID(Guid id)
+        {
+            var loai = _context.DetaillNAUs.FirstOrDefault(lo => lo.IDDetailNAU == id);
+            if (loai != null)
+            {
+                return new DetailNAUModel
+                {
+                    IDDetailNAU = loai.IDDetailNAU,
+                    Km_Min = loai.Km_Min,
+                    Km_Max = loai.Km_Max,
+                    CountPerforation = loai.CountPerforation,
+                    AccessaryID = loai.AccessaryID,
+                    UnitID = loai.UnitID,
+                    VehicleID = loai.VehicleID
+                };
+            }
+            return null;
+        }
     }
 }

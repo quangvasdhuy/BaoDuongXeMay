@@ -7,6 +7,7 @@ namespace BaoDuongXeMay.Services
     public interface IDetailNAURepository
     {
         List<DetailNAUModel> GetAll();
-        //DetailNAUModel GetByID(Guid id);
+        DetailNAUModel Add(DetailNAUVM loai);
+        DetailNAUModel GetByID(Guid id);
     }
 }
