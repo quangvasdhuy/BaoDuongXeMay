@@ -9,7 +9,7 @@ namespace BaoDuongXeMay.Services
         List<DetailVehicle_UserVM> GetAll();
         DetailVehicle_UserVM GetByID(Guid id);
         DetailVehicle_UserVM Add(DetailVehicle_UserModel loai);
-        void Update(DetailVehicle_UserVM loai);
+        DetailVehicle_UserVM Update(DetailVehicle_UserVM loai, Guid id);
         void Delete(Guid id);
     }
 }

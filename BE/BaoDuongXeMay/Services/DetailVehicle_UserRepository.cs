@@ -71,13 +71,28 @@ namespace BaoDuongXeMay.Services
             return null;
         }
 
-        public void Update(DetailVehicle_UserVM loai)
+        public DetailVehicle_UserVM Update(DetailVehicle_UserVM loai, Guid id)
         {
-            var _loai = _context.DetailVehicle_Users.FirstOrDefault(lo => lo.IDDeatil == loai.IDDeatil);
-            loai.UserID = _loai.UserID;
-            loai.KM_Current = _loai.KM_Current;
-            loai.VehicleID = _loai.VehicleID;
-            _context.SaveChanges();
+            var updateById = _context.DetailVehicle_Users.SingleOrDefault(mo => mo.IDDeatil == id);
+            if (updateById != null)
+            {
+                updateById.VehicleID = loai.VehicleID;
+                updateById.UserID = loai.UserID;
+                updateById.KM_Current = loai.KM_Current;
+
+                _context.SaveChanges();
+                return new DetailVehicle_UserVM
+                {
+                    IDDeatil = updateById.IDDeatil,
+                    VehicleID = updateById.VehicleID,
+                    UserID = updateById.UserID,
+                    KM_Current = updateById.KM_Current
+                };
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

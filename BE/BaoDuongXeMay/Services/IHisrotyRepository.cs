@@ -9,7 +9,7 @@ namespace BaoDuongXeMay.Services
         List<HistoryVM> GetAll();
         HistoryVM GetByID(Guid id);
         HistoryVM Add(HistoryModel loai);
-        void Update(HistoryVM loai);
+        HistoryVM Update(HistoryVM loai, Guid id);
         void Delete(Guid id);
     }
 }

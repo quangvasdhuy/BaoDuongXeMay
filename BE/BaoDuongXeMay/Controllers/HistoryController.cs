@@ -10,14 +10,14 @@ namespace BaoDuongXeMay.Controllers
     [ApiController]
     public class HistoryController : ControllerBase
     {
-        private readonly HistoryRepository _historyRepository;
-        public HistoryController(HistoryRepository historyRepository)
+        private readonly IHisrotyRepository _historyRepository;
+        public HistoryController(IHisrotyRepository historyRepository)
 
         {
             _historyRepository = historyRepository;
         }
         [HttpGet]
-        public IActionResult GetAllHistory()
+        public IActionResult GetAll()
         {
             try
             {
@@ -64,23 +64,23 @@ namespace BaoDuongXeMay.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Update(Guid id, DetailVehicle_UserVM loai)
-        //{
-        //    if (id != loai.IDDeatil)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    try
-        //    {
-        //        _detailVehicle_UserRepository.Update(loai);
-        //        return NoContent();
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
+        [HttpPut("{id}")]
+        public IActionResult Update(HistoryVM loai, Guid id)
+        {
+            if (id != loai.IdHistory)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _historyRepository.Update(loai, id);
+                return NoContent();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)

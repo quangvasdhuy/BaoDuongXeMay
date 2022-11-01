@@ -64,23 +64,23 @@ namespace BaoDuongXeMay.Controllers
             }
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Update(Guid id, DetailVehicle_UserVM loai)
-        //{
-        //    if (id != loai.IDDeatil)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    try
-        //    {
-        //        _detailVehicle_UserRepository.Update(loai);
-        //        return NoContent();
-        //    }
-        //    catch
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
+        [HttpPut("{id}")]
+        public IActionResult Update(DetailVehicle_UserVM loai, Guid id)
+        {
+            if (id != loai.IDDeatil)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _detailVehicle_UserRepository.Update(loai, id);
+                return NoContent();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)

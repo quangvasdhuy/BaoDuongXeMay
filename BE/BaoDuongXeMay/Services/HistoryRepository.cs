@@ -61,7 +61,7 @@ namespace BaoDuongXeMay.Services
 
         public HistoryVM GetByID(Guid id)
         {
-            var loai = _context.Histories.FirstOrDefault(lo => lo.IDDeatil == id);
+            var loai = _context.Histories.FirstOrDefault(lo => lo.IdHistory == id);
             if (loai != null)
             {
                 return new HistoryVM
@@ -76,9 +76,30 @@ namespace BaoDuongXeMay.Services
             return null;
         }
 
-        public void Update(HistoryVM loai)
+        public HistoryVM Update(HistoryVM loai, Guid id)
         {
-            throw new NotImplementedException();
+            var updateById = _context.Histories.SingleOrDefault(mo => mo.IdHistory == id);
+            if (updateById != null)
+            {
+                updateById.IDDeatil = loai.IDDeatil;
+                updateById.IDDetailNAU = loai.IDDetailNAU;
+                updateById.TotalCost = loai.TotalCost;
+                updateById.RepairDate = loai.RepairDate;
+
+                _context.SaveChanges();
+                return new HistoryVM
+                {
+                    IDDeatil = updateById.IDDeatil,
+                    IdHistory = updateById.IdHistory,
+                    IDDetailNAU = updateById.IDDetailNAU,
+                    TotalCost = updateById.TotalCost,
+                    RepairDate = updateById.RepairDate
+                };
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
