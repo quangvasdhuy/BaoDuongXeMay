@@ -73,5 +73,7 @@ namespace BaoDuongXeMay.Services
             loai.Image = _loai.Image;
             _context.SaveChanges();
         }
+
+
     }
 }

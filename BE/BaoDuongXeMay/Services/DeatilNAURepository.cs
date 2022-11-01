@@ -75,5 +75,17 @@ namespace BaoDuongXeMay.Services
             }
             return null;
         }
+
+        public void Update(DetailNAUModel loai)
+        {
+            var _loai = _context.DetaillNAUs.FirstOrDefault(lo => lo.IDDetailNAU == loai.IDDetailNAU);
+            loai.Km_Min = _loai.Km_Min;
+            loai.Km_Max = _loai.Km_Max;
+            loai.CountPerforation = _loai.CountPerforation;
+            loai.AccessaryID = _loai.AccessaryID;
+            loai.UnitID = _loai.UnitID;
+            loai.VehicleID = _loai.VehicleID;
+            _context.SaveChanges();
+        }
     }
 }

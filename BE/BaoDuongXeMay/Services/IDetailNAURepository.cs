@@ -9,5 +9,6 @@ namespace BaoDuongXeMay.Services
         List<DetailNAUModel> GetAll();
         DetailNAUModel Add(DetailNAUVM loai);
         DetailNAUModel GetByID(Guid id);
+        void Update(DetailNAUModel loai);
     }
 }

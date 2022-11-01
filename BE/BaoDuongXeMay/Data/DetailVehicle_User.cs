@@ -7,7 +7,6 @@ namespace BaoDuongXeMay.Data
     {
         public Guid IDDeatil { get; set; }
         public Guid VehicleID { get; set; }
-        public Guid IDDetailNAU { get; set; }
         public int UserID { get; set; }
         public float KM_Current { get; set; }
 

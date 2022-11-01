@@ -43,6 +43,9 @@ namespace BaoDuongXeMay
             services.AddScoped<ICatagoryVehicleRepository, CategoryVehicleRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IDetailNAURepository, DeatilNAURepository>();
+            services.AddScoped<IDetailVehicle_UserRepository, DetailVehicle_UserRepository>();
+            services.AddScoped<IHisrotyRepository, HistoryRepository>();
+
 
             services.Configure<AppSetting>(Configuration.GetSection("AppSettings"));
 

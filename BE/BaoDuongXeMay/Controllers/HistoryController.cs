@@ -2,27 +2,26 @@
 using BaoDuongXeMay.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace BaoDuongXeMay.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DetailNAUController : ControllerBase
+    public class HistoryController : ControllerBase
     {
-        private readonly IDetailNAURepository _detailNAURepository;
-        public DetailNAUController(IDetailNAURepository detailNAURepository)
+        private readonly HistoryRepository _historyRepository;
+        public HistoryController(HistoryRepository historyRepository)
 
         {
-            _detailNAURepository = detailNAURepository;
+            _historyRepository = historyRepository;
         }
         [HttpGet]
-        public IActionResult GetAllDetailNAU()
+        public IActionResult GetAllHistory()
         {
             try
             {
-                var result = _detailNAURepository.GetAll();
+                var result = _historyRepository.GetAll();
                 return Ok(result);
             }
             catch
@@ -32,11 +31,11 @@ namespace BaoDuongXeMay.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(DetailNAUVM loai)
+        public IActionResult Add(HistoryModel loai)
         {
             try
             {
-                return Ok(_detailNAURepository.Add(loai));
+                return Ok(_historyRepository.Add(loai));
             }
             catch
             {
@@ -49,7 +48,7 @@ namespace BaoDuongXeMay.Controllers
         {
             try
             {
-                var data = _detailNAURepository.GetByID(id);
+                var data = _historyRepository.GetByID(id);
                 if (data != null)
                 {
                     return Ok(data);
@@ -65,23 +64,36 @@ namespace BaoDuongXeMay.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(Guid id, DetailNAUModel loai)
+        //[HttpPut("{id}")]
+        //public IActionResult Update(Guid id, DetailVehicle_UserVM loai)
+        //{
+        //    if (id != loai.IDDeatil)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    try
+        //    {
+        //        _detailVehicle_UserRepository.Update(loai);
+        //        return NoContent();
+        //    }
+        //    catch
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
         {
-            if (id != loai.IDDetailNAU)
-            {
-                return BadRequest();
-            }
             try
             {
-                _detailNAURepository.Update(loai);
-                return NoContent();
+                _historyRepository.Delete(id);
+                return Ok();
             }
             catch
             {
                 return BadRequest();
             }
         }
-
     }
 }
