@@ -8,5 +8,6 @@ namespace BaoDuongXeMay.Models
         public Guid VehicleID { get; set; }
         public int UserID { get; set; }
         public float KM_Current { get; set; }
+        public float KM_Old { get; set; }
     }
 }

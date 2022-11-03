@@ -18,6 +18,7 @@ namespace BaoDuongXeMay.Services
             var _loai = new DetailVehicle_User
             {
                 KM_Current = loai.KM_Current,
+                KM_Old = loai.KM_Old,
                 UserID = loai.UserID,
                 VehicleID = loai.VehicleID
             };
@@ -28,6 +29,7 @@ namespace BaoDuongXeMay.Services
             {
                 IDDeatil = _loai.IDDeatil,
                 KM_Current = _loai.KM_Current,
+                KM_Old = loai.KM_Old,
                 UserID = _loai.UserID,
                 VehicleID = _loai.VehicleID
             };
@@ -50,7 +52,8 @@ namespace BaoDuongXeMay.Services
                 IDDeatil = lo.IDDeatil,
                 VehicleID = lo.VehicleID,
                 UserID = lo.UserID,
-                KM_Current = lo.KM_Current
+                KM_Current = lo.KM_Current,
+                KM_Old = lo.KM_Old,
             });
             return loais.ToList();
         }
@@ -65,7 +68,8 @@ namespace BaoDuongXeMay.Services
                     IDDeatil = loai.IDDeatil,
                     VehicleID = loai.VehicleID,
                     UserID = loai.UserID,
-                    KM_Current = loai.KM_Current
+                    KM_Current = loai.KM_Current,
+                    KM_Old = loai.KM_Old
                 };
             }
             return null;
@@ -79,6 +83,7 @@ namespace BaoDuongXeMay.Services
                 updateById.VehicleID = loai.VehicleID;
                 updateById.UserID = loai.UserID;
                 updateById.KM_Current = loai.KM_Current;
+                updateById.KM_Old = loai.KM_Old;
 
                 _context.SaveChanges();
                 return new DetailVehicle_UserVM
@@ -86,7 +91,8 @@ namespace BaoDuongXeMay.Services
                     IDDeatil = updateById.IDDeatil,
                     VehicleID = updateById.VehicleID,
                     UserID = updateById.UserID,
-                    KM_Current = updateById.KM_Current
+                    KM_Current = updateById.KM_Current,
+                    KM_Old = updateById.KM_Old
                 };
             }
             else
