@@ -10,5 +10,6 @@ namespace BaoDuongXeMay.Models
 
         public DateTime RepairDate { get; set; }
         public float TotalCost { get; set; }
+        public float Km_accumulation { get; set; }
     }
 }

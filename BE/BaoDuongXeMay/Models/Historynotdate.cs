@@ -2,12 +2,10 @@
 
 namespace BaoDuongXeMay.Models
 {
-    public class HistoryModel
+    public class Historynotdate
     {
         public Guid IDDetailNAU { get; set; }
         public Guid IDDeatil { get; set; }
-
-        public DateTime RepairDate { get; set; }
         public float TotalCost { get; set; }
         public float Km_accumulation { get; set; }
     }

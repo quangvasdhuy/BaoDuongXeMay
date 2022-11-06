@@ -4,14 +4,16 @@ using BaoDuongXeMay.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaoDuongXeMay.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221105153842_11-5")]
+    partial class _115
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,10 +131,7 @@ namespace BaoDuongXeMay.Migrations
                     b.Property<Guid>("IDDetailNAU")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<float>("Km_accumulation")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("RepairDate")
+                    b.Property<DateTime?>("RepairDate")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("TotalCost")

@@ -14,14 +14,14 @@ namespace BaoDuongXeMay.Services
         {
             _context = context;
         }
-        public HistoryVM Add(HistoryModel loai)
+        public HistoryVM Add(Historynotdate loai)
         {
             var _loai = new History
             {
                 IDDeatil = loai.IDDeatil,
                 IDDetailNAU = loai.IDDetailNAU,
                 TotalCost = loai.TotalCost,
-                RepairDate = loai.RepairDate
+                Km_accumulation = loai.Km_accumulation
             };
             _context.Add(_loai);
             _context.SaveChanges();
@@ -32,7 +32,8 @@ namespace BaoDuongXeMay.Services
                 IdHistory = _loai.IdHistory,
                 IDDetailNAU = _loai.IDDetailNAU,
                 TotalCost = _loai.TotalCost,
-                RepairDate = _loai.RepairDate
+                RepairDate = DateTime.Now,
+                Km_accumulation = _loai.Km_accumulation
             };
         }
 
@@ -54,7 +55,8 @@ namespace BaoDuongXeMay.Services
                 IdHistory = lo.IdHistory,
                 IDDetailNAU = lo.IDDetailNAU,
                 TotalCost = lo.TotalCost,
-                RepairDate = lo.RepairDate
+                RepairDate = lo.RepairDate,
+                Km_accumulation = lo.Km_accumulation
             });
             return loais.ToList();
         }
@@ -70,7 +72,8 @@ namespace BaoDuongXeMay.Services
                     IdHistory = loai.IdHistory,
                     IDDetailNAU = loai.IDDetailNAU,
                     TotalCost = loai.TotalCost,
-                    RepairDate = loai.RepairDate
+                    RepairDate = loai.RepairDate,
+                    Km_accumulation = loai.Km_accumulation
                 };
             }
             return null;
@@ -85,6 +88,7 @@ namespace BaoDuongXeMay.Services
                 updateById.IDDetailNAU = loai.IDDetailNAU;
                 updateById.TotalCost = loai.TotalCost;
                 updateById.RepairDate = loai.RepairDate;
+                updateById.Km_accumulation = loai.Km_accumulation;
 
                 _context.SaveChanges();
                 return new HistoryVM
@@ -93,7 +97,8 @@ namespace BaoDuongXeMay.Services
                     IdHistory = updateById.IdHistory,
                     IDDetailNAU = updateById.IDDetailNAU,
                     TotalCost = updateById.TotalCost,
-                    RepairDate = updateById.RepairDate
+                    RepairDate = updateById.RepairDate,
+                    Km_accumulation = updateById.Km_accumulation
                 };
             }
             else

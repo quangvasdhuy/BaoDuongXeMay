@@ -10,6 +10,7 @@ namespace BaoDuongXeMay.Data
 
         public DateTime RepairDate  { get; set; }
         public float TotalCost { get; set; }
+        public float Km_accumulation { get; set; }
 
         //relationship
         public DetaillNAU DetaillNAU { get; set; }

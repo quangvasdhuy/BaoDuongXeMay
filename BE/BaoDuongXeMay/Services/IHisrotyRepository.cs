@@ -8,7 +8,7 @@ namespace BaoDuongXeMay.Services
     {
         List<HistoryVM> GetAll();
         HistoryVM GetByID(Guid id);
-        HistoryVM Add(HistoryModel loai);
+        HistoryVM Add(Historynotdate loai);
         HistoryVM Update(HistoryVM loai, Guid id);
         void Delete(Guid id);
     }

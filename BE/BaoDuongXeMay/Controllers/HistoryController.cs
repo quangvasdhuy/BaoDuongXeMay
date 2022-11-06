@@ -31,7 +31,7 @@ namespace BaoDuongXeMay.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(HistoryModel loai)
+        public IActionResult Add(Historynotdate loai)
         {
             try
             {
