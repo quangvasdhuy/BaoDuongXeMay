@@ -11,6 +11,8 @@ namespace BaoDuongXeMay.Data
         public DbSet<CategoryVehicle> CategoryVehicles { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
         public DbSet<Accessary> Accessaries { get; set; }
         public DbSet<DetaillNAU> DetaillNAUs { get; set; }
         public DbSet<DetailVehicle_User> DetailVehicle_Users { get; set; }

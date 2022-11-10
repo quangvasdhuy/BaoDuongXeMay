@@ -14,13 +14,14 @@ namespace BaoDuongXeMay.Services
         {
             _context = context;
         }
-        public HistoryVM Add(Historynotdate loai)
+        public HistoryVM Add(HistoryModel loai)
         {
             var _loai = new History
             {
                 IDDeatil = loai.IDDeatil,
                 IDDetailNAU = loai.IDDetailNAU,
                 TotalCost = loai.TotalCost,
+                RepairDate = DateTime.Now,
                 Km_accumulation = loai.Km_accumulation
             };
             _context.Add(_loai);
@@ -32,7 +33,7 @@ namespace BaoDuongXeMay.Services
                 IdHistory = _loai.IdHistory,
                 IDDetailNAU = _loai.IDDetailNAU,
                 TotalCost = _loai.TotalCost,
-                RepairDate = DateTime.Now,
+                RepairDate = _loai.RepairDate,
                 Km_accumulation = _loai.Km_accumulation
             };
         }
