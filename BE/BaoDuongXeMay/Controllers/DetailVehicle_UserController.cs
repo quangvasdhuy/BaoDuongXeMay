@@ -88,7 +88,7 @@ namespace BaoDuongXeMay.Controllers
             try
             {
                 _detailVehicle_UserRepository.Delete(id);
-                return Ok();
+                return NoContent();
             }
             catch
             {

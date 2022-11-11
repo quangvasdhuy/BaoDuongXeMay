@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {}
+    "D:\\DACS\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {}
   },
   "projects": {
-    "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {
+    "D:\\DACS\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
+        "projectUniqueName": "D:\\DACS\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
         "projectName": "BaoDuongXeMay",
-        "projectPath": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
-        "packagesPath": "C:\\Users\\doanq\\.nuget\\packages\\",
-        "outputPath": "E:\\Workspace\\DoAnChuyenNganh\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\obj\\",
+        "projectPath": "D:\\DACS\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\BaoDuongXeMay.csproj",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
+        "outputPath": "D:\\DACS\\BaoDuongXeMay\\BE\\BaoDuongXeMay\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\doanq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -69,8 +73,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -82,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }
