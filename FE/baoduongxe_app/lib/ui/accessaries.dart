@@ -1,10 +1,6 @@
-import 'dart:convert';
-import 'package:baoduongxe_app/model/accessary.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../services/base_client.dart';
 import 'package:http/http.dart' as http;
-import 'package:fluttertoast/fluttertoast.dart';
 
 class MyAccessaries extends StatefulWidget {
   const MyAccessaries({Key? key}) : super(key: key);
@@ -53,96 +49,6 @@ class _MyAccessariesState extends State<MyAccessaries> {
         //leading: PopupMenuWidget(),
         title: cusSearchBar,
       ),
-      // floatingActionButton: FloatingActionButton(
-      //     backgroundColor: Colors.grey.shade700,
-      //     child: const Icon(Icons.add),
-      //     onPressed: () {
-      //       showDialog(
-      //           barrierDismissible: false,
-      //           context: context,
-      //           builder: (context) =>
-      //               AlertDialog(
-      //                   content: Form(
-      //                     child: Column(
-      //                       mainAxisSize: MainAxisSize.min,
-      //                       children: [
-      //                         TextFormField(
-      //                           decoration: InputDecoration(
-      //                               filled: true,
-      //                               fillColor: Colors.grey[200],
-      //                               labelText: "Vehicle Name"
-      //                           ),
-      //                           onChanged: (value){
-      //                             vehicleName = value;
-      //                           },
-      //                         ),
-      //                         const SizedBox(
-      //                           height: 12,
-      //                         ),
-      //                         TextFormField(
-      //                           decoration: InputDecoration(
-      //                               filled: true,
-      //                               fillColor: Colors.grey[200],
-      //                               labelText: "Description"
-      //                           ),
-      //                           onChanged: (value){
-      //                             description = value;
-      //                           },
-      //                         ),
-      //                         const SizedBox(
-      //                           height: 12,
-      //                         ),
-      //                         TextFormField(
-      //                           decoration: InputDecoration(
-      //                               filled: true,
-      //                               fillColor: Colors.grey[200],
-      //                               labelText: "Image"
-      //                           ),
-      //                           onChanged: (value){
-      //                             image = value;
-      //                           },
-      //                         ),
-      //                         const SizedBox(
-      //                           height: 12,
-      //                         ),
-      //                         Row(
-      //                           mainAxisAlignment: MainAxisAlignment.end,
-      //                           children: [
-      //                             TextButton(
-      //                                 onPressed: () async {
-      //                                   Map<String, dynamic> data = {
-      //                                     "vehicleName" : vehicleName,
-      //                                     "description" : description,
-      //                                     "image" : image,
-      //                                     "categoryVehicleID": categoryVehicleID,
-      //                                   };
-      //                                   String res = await BaseClient().createPost(data, '/Vehicles');
-      //                                   res == "success"
-      //                                       ? Fluttertoast.showToast(msg: "Post Created Successfully !")
-      //                                       : Fluttertoast.showToast(msg: "Error Creating Post !");
-      //                                   Navigator.of(context).pop();
-      //                                   setState(() {
-      //
-      //                                   });
-      //                                 },
-      //                                 child: const Text("Add")
-      //                             ),
-      //                             TextButton(
-      //                               onPressed: () {
-      //                                 Navigator.of(context).pop();
-      //                                 setState(() {});
-      //                               },
-      //                               child: const Text("Cancel", style: TextStyle(color: Colors.red),),
-      //                             )
-      //                           ],
-      //                         )
-      //                       ],
-      //                     ),
-      //                   )
-      //               )
-      //       );
-      //     }
-      // ),
       body: FutureBuilder(
         future: BaseClient().getPosts('/Accessary'),
         builder: (context,snapshot){

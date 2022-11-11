@@ -1,20 +1,18 @@
-import 'dart:convert';
 import 'package:baoduongxe_app/model/vehicle.dart';
 import 'package:baoduongxe_app/ui/detail_vehicle.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../services/base_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
-class MyVehicles extends StatefulWidget {
-  const MyVehicles({Key? key}) : super(key: key);
+class Vehicles extends StatefulWidget {
+  const Vehicles({Key? key}) : super(key: key);
 
   @override
-  State<MyVehicles> createState() => _MyVehiclesState();
+  State<Vehicles> createState() => _VehiclesState();
 }
 
-class _MyVehiclesState extends State<MyVehicles> {
+class _VehiclesState extends State<Vehicles> {
   // TextEditingController vehicleNameController = TextEditingController();
   // TextEditingController descriptionController = TextEditingController();
   // TextEditingController imageController = TextEditingController();
@@ -23,6 +21,7 @@ class _MyVehiclesState extends State<MyVehicles> {
   String? description = "";
   String? image = "";
   String? categoryVehicleID = '837ef4f8-9281-405e-f388-08dab45109be';
+
 
   // Widget buildNavgateButton() => FloatingActionButton(
   //     backgroundColor: Colors.grey.shade700,
@@ -195,7 +194,7 @@ class _MyVehiclesState extends State<MyVehicles> {
                     vehicleName: snapshot.data?[index]['vehicleName'],
                     description: snapshot.data?[index]['description'],
                     image: snapshot.data?[index]['image'],
-                    categoryVehicleName: snapshot.data?[index]['categoryVehicleName'],
+                    categoryVehicleID: snapshot.data?[index]['categoryVehicleName'],
                   );
                   return ListTile(
                     leading: CircleAvatar(

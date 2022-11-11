@@ -147,40 +147,6 @@ namespace BaoDuongXeMay.Migrations
                     b.ToTable("History");
                 });
 
-            modelBuilder.Entity("BaoDuongXeMay.Data.RefreshToken", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ExpiredAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRevoked")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsUsed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("IssuedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("JwtId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("RefreshToken");
-                });
-
             modelBuilder.Entity("BaoDuongXeMay.Data.Unit", b =>
                 {
                     b.Property<Guid>("UnitID")
@@ -326,17 +292,6 @@ namespace BaoDuongXeMay.Migrations
                     b.Navigation("DetaillNAU");
 
                     b.Navigation("DetailVehicle_User");
-                });
-
-            modelBuilder.Entity("BaoDuongXeMay.Data.RefreshToken", b =>
-                {
-                    b.HasOne("BaoDuongXeMay.Data.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BaoDuongXeMay.Data.Vehicle", b =>

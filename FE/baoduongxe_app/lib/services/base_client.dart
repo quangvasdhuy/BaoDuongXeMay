@@ -17,7 +17,7 @@ class BaseClient {
     var url = Uri.parse(baseUrl + api);
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.get(url, headers: _headers);
@@ -35,7 +35,7 @@ class BaseClient {
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
       'Content-Type': 'application/json',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.post(url, body: _payload, headers: _headers);
@@ -54,7 +54,7 @@ class BaseClient {
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
       'Content-Type': 'application/json',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.put(url, body: _payload, headers: _headers);
@@ -71,7 +71,7 @@ class BaseClient {
     var url = Uri.parse(baseUrl + api);
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.delete(url, headers: _headers);

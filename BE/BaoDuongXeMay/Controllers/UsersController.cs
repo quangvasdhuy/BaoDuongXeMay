@@ -132,7 +132,7 @@ namespace BaoDuongXeMay.Controllers
             });
         }
 
-        private async Task<TokenModel> GenerateToken(User user)
+        private string GenerateToken(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var secretKetBytes = Encoding.UTF8.GetBytes(_appSettings.SecretKey);
@@ -142,54 +142,22 @@ namespace BaoDuongXeMay.Controllers
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.Email, user.Email),
                     new Claim("Username", user.Username),
                     new Claim("Id", user.UserID.ToString()),
 
                     //roles
+                    new Claim("TokenId", Guid.NewGuid().ToString())
 
                 }),
-                Expires = DateTime.UtcNow.AddSeconds(20),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey
                 (secretKetBytes), SecurityAlgorithms.HmacSha512Signature)
             };
             var token = jwtTokenHandler.CreateToken(tokenDescription);
 
-            var accessToken = jwtTokenHandler.WriteToken(token);
-            var refreshToken = GenerateRefreshToken();
+            return jwtTokenHandler.WriteToken(token);
 
-            //Luu Database
-            var refreshTokenEntity = new RefreshToken
-            {
-                Id = Guid.NewGuid(),
-                JwtId = token.Id,
-                Token = refreshToken,
-                IsUsed = false,
-                IsRevoked = false,
-                IssuedAt = DateTime.UtcNow,
-                ExpiredAt = DateTime.UtcNow.AddHours(1)
-            };
-
-            await _context.AddAsync(refreshTokenEntity);
-            await _context.SaveChangesAsync();
-            return new TokenModel
-            {
-                AccessToken = accessToken,
-                RefreshToken = refreshToken
-            };
-        }
-
-        private string GenerateRefreshToken()
-        {
-            var random = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                 rng.GetBytes(random);
-
-                return Convert.ToBase64String(random);
-            }
-        }
+        }    
     }
 }

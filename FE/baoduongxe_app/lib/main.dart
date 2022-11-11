@@ -1,4 +1,7 @@
 import 'package:baoduongxe_app/ui/accessaries.dart';
+import 'package:baoduongxe_app/ui/detailnau.dart';
+import 'package:baoduongxe_app/ui/my_vehicles.dart';
+import 'package:baoduongxe_app/ui/profile_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'ui/home.dart';
@@ -15,9 +18,12 @@ void main() {
       'register': (context) => const MyRegister(),
       'login': (context) => const MyLogin(),
       'home': (context) => const MyHome(),
-      'vehicles': (context) => const MyVehicles(),
+      'vehicles': (context) => const Vehicles(),
+      'myvehicles': (context) => const MyVehicles(),
       'about': (context) => const MyApp(),
       'accessary': (context) => const MyAccessaries(),
+      'detailnau': (context) => const MyDetailNau(),
+      // 'profile': (context) => ProfilePage(),
     },
   ));
 }
@@ -27,6 +33,7 @@ class MyApp extends StatefulWidget {
 
   @override
   State<MyApp> createState() => _MyAppState();
+
 }
 
 class _MyAppState extends State<MyApp> {
@@ -60,11 +67,12 @@ class _MyAppState extends State<MyApp> {
           },
           children: [
             const MyHome(),
+            const MyDetailNau(),
             const MyVehicles(),
-            const MyAccessaries(),
-            Container(
-              color: Colors.red,
-            )
+            ProfilePage(),
+            // Container(
+            //   color: Colors.red,
+            // )
           ],
         ),
       ),
@@ -90,8 +98,8 @@ class _MyAppState extends State<MyApp> {
               inactiveColor: Colors.grey,
               activeColor: Colors.white),
           BottomNavyBarItem(
-              title: const Text("Accessaries"),
-              icon: const Icon(Icons.star),
+              title: const Text("My Vehicles"),
+              icon: const Icon(Icons.person),
               inactiveColor: Colors.grey,
               activeColor: Colors.white),
           BottomNavyBarItem(

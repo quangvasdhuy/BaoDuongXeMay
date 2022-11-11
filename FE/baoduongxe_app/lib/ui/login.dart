@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../model/user.dart';
 import '../services/base_client.dart';
+import 'dart:convert' as convert;
+
+var getUser;
+var x_vehicles = [];
+var x_detailNAUs = [];
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
@@ -13,6 +18,50 @@ class MyLogin extends StatefulWidget {
 class _MyLoginState extends State<MyLogin> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  var Users = [];
+
+  Future getData(String api) async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    var response = await http.get(Uri.parse(baseUrl + api));
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      setState(() {
+        Users = jsonResponse;
+      });
+    }
+  }
+  Future getData2(String api) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    var response = await http.get(Uri.parse(baseUrl + api));
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      setState(() {
+        x_vehicles = jsonResponse;
+      });
+    }
+  }
+  Future getData3(String api) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    var response = await http.get(Uri.parse(baseUrl + api));
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      setState(() {
+        x_detailNAUs = jsonResponse;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    getData('/Users');
+    getData2('/Vehicles');
+    getData3('/DetailNAU');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +145,9 @@ class _MyLoginState extends State<MyLogin> {
                                           .post('/Users/Login', user)
                                           .catchError((err) {});
                                       if (response == null) return;
-                                      debugPrint('Login success:');
+
+                                      //getUser = Users.firstWhere((e) => e["username"] == usernameController.text.toString());
+                                      //debugPrint('Login success: '+getUser["username"]+" - "+getUser["userID"].toString());
                                       Navigator.pushNamed(context, 'about');
                                     },
                                     icon: const Icon(
