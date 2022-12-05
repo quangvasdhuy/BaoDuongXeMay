@@ -1,4 +1,6 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../model/user.dart';
 import '../services/base_client.dart';
 
@@ -14,6 +16,11 @@ class _MyRegisterState extends State<MyRegister> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  String errorText ="";
+  bool vis = true;
+  bool validate = false;
+  bool circular = false;
+  final _globalkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +55,21 @@ class _MyRegisterState extends State<MyRegister> {
                       margin: const EdgeInsets.only(left: 35, right: 35),
                       child: Column(
                         children: [
-                          TextField(
+                          TextFormField(
                             controller: nameController,
                             style: const TextStyle(color: Colors.white),
+                            validator: (value) {
+                              RegExp regex = new RegExp(r'^.{2,}$');
+                              if(value!.isEmpty){
+                                return ("Họ không được để trống!");
+                              }
+                              if(!regex.hasMatch(value)){
+                                return ("Họ của bạn không đúng (Tối thiểu. 2 kí tự)");
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
+                                //errorText: validate ? null : errorText,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
                                   borderSide: const BorderSide(
@@ -73,10 +91,11 @@ class _MyRegisterState extends State<MyRegister> {
                           const SizedBox(
                             height: 10,
                           ),
-                          TextField(
+                          TextFormField(
                             controller: usernameController,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
+                                //errorText: validate ? null : errorText,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
                                   borderSide: const BorderSide(
@@ -98,8 +117,10 @@ class _MyRegisterState extends State<MyRegister> {
                           const SizedBox(
                             height: 10,
                           ),
-                          TextField(
+                          TextFormField(
                             controller: emailController,
+                            // validator: (value)=> value != null && !EmailValidator.validate(value)
+                            // ? "Enter correct email!" : null,
                             style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
@@ -123,11 +144,29 @@ class _MyRegisterState extends State<MyRegister> {
                           const SizedBox(
                             height: 10,
                           ),
-                          TextField(
+                          TextFormField(
                             controller: passwordController,
                             style: const TextStyle(color: Colors.white),
-                            obscureText: true,
+
+                            validator: (value) {
+                              if (value?.length == null || value?.length == 0) return "Password can't be empty";
+                              if (value!.length < 6) return "Password lenght must have >=6";
+                              return null;
+                            },
+                            obscureText: vis,
                             decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(vis ? Icons.visibility_off : Icons.visibility),
+                                  onPressed: () {
+                                    setState(() {
+                                      vis = !vis;
+                                    });
+                                  },
+                                ),
+                                helperText: "Password length should have >=6",
+                                helperStyle: TextStyle(
+                                  fontSize: 14,
+                                ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
                                   borderSide: const BorderSide(
@@ -147,7 +186,7 @@ class _MyRegisterState extends State<MyRegister> {
                                 )),
                           ),
                           const SizedBox(
-                            height: 30,
+                            height: 28,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,16 +204,7 @@ class _MyRegisterState extends State<MyRegister> {
                                 child: IconButton(
                                     color: Colors.white,
                                     onPressed: () async {
-                                      var user = User(
-                                          name: nameController.text.toString(),
-                                          username: usernameController.text.toString(),
-                                          email: emailController.text.toString(),
-                                          password: passwordController.text.toString());
-                                      var response = await BaseClient()
-                                          .post('/Users', user)
-                                          .catchError((err) {});
-                                      if (response == null) return;
-                                      debugPrint('Register success:');
+
                                       showDialog(context: context, builder: (context){
                                         return AlertDialog(
                                           title: const Text("Register ?"),
@@ -182,8 +212,24 @@ class _MyRegisterState extends State<MyRegister> {
                                             TextButton(onPressed: (){
                                               Navigator.pop(context);
                                             }, child: const Text("NO",style: TextStyle(color: Colors.red),)),
-                                            TextButton(onPressed: (){
-                                              Navigator.pushNamed(context, 'login');
+                                            TextButton(onPressed: () async{
+                                              //Navigator.pushNamed(context, 'login');
+                                              var user = User(
+                                                  name: nameController.text.toString(),
+                                                  username: usernameController.text.toString(),
+                                                  email: emailController.text.toString(),
+                                                  password: passwordController.text.toString(),
+                                                  image: "https://www.pinpng.com/pngs/m/53-531868_person-icon-png-transparent-png.png"
+                                              );
+                                              //print(user);
+                                              var response = await BaseClient()
+                                                  .post('/Users', user)
+                                                  .catchError((err) {});
+                                              //print(response);
+                                              response != null
+                                                  ? Fluttertoast.showToast(msg: "Post Edited Successfully !")
+                                                  : Fluttertoast.showToast(msg: "Error Editing Post !");
+                                              Navigator.pop(context);
                                             }, child: const Text("YES"))
                                           ],
                                         );
@@ -197,7 +243,7 @@ class _MyRegisterState extends State<MyRegister> {
                             ],
                           ),
                           const SizedBox(
-                            height: 28,
+                            height: 25,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,6 +273,121 @@ class _MyRegisterState extends State<MyRegister> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // checkUser() async {
+  //   if (usernameController.text.length == 0) {
+  //     setState(() {
+  //       // circular = false;
+  //       validate = false;
+  //       errorText = "Username Can't be empty";
+  //     });
+  //   } else {
+  //     var response = await networkHandler
+  //         .get("/user/checkUsername/${usernameController.text}");
+  //     if (response['Status']) {
+  //       setState(() {
+  //         // circular = false;
+  //         validate = false;
+  //         errorText = "Username already taken";
+  //       });
+  //     } else {
+  //       setState(() {
+  //         // circular = false;
+  //         validate = true;
+  //       });
+  //     }
+  //   }
+  // }
+
+  Widget usernameTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10.0),
+      child: Column(
+        children: [
+          Text("Username"),
+          TextFormField(
+            controller: usernameController,
+            decoration: InputDecoration(
+              errorText: validate ? null : errorText,
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 2,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget emailTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10.0),
+      child: Column(
+        children: [
+          Text("Email"),
+          TextFormField(
+            controller: emailController,
+            validator: (value) {
+              if (value?.length == null || value?.length == 0) return "Email can't be empty";
+              if (value!.contains("@")) return "Email is Invalid";
+              return null;
+            },
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 2,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget passwordTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10.0),
+      child: Column(
+        children: [
+          Text("Password"),
+          TextFormField(
+            controller: passwordController,
+            validator: (value) {
+              if (value?.length == null || value?.length == 0) return "Password can't be empty";
+              if (value!.length < 6) return "Password lenght must have >=6";
+              return null;
+            },
+            obscureText: vis,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(vis ? Icons.visibility_off : Icons.visibility),
+                onPressed: () {
+                  setState(() {
+                    vis = !vis;
+                  });
+                },
+              ),
+              helperText: "Password length should have >=8",
+              helperStyle: TextStyle(
+                fontSize: 14,
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 2,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

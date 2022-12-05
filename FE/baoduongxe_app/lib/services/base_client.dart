@@ -7,7 +7,9 @@ import 'package:http/http.dart' as http;
 
 import '../model/user.dart';
 
-const String baseUrl = 'https://localhost:44337/api';
+//const String baseUrl = 'https://localhost:44337/api';
+const String baseUrl = 'https://10.0.2.2:5001/api';
+//const String baseUrl = 'https://localhost:5001/api';
 
 class BaseClient {
   var client = http.Client();
@@ -17,7 +19,7 @@ class BaseClient {
     var url = Uri.parse(baseUrl + api);
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.get(url, headers: _headers);
@@ -33,16 +35,19 @@ class BaseClient {
     var url = Uri.parse(baseUrl + api);
     var _payload = json.encode(object);
     var _headers = {
-      'Authorization': 'Bearer sfie328370428387=',
-      'Content-Type': 'application/json',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      //'Authorization': 'Bearer sfie328370428387=',
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+      //'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.post(url, body: _payload, headers: _headers);
     if (response.statusCode == 200) {
+      print("success");
       return response.body;
     } else {
       //throw exception and catch it in UI
+      print("failed");
       throw Exception('Request API error!');
     }
   }
@@ -54,7 +59,7 @@ class BaseClient {
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
       'Content-Type': 'application/json',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.put(url, body: _payload, headers: _headers);
@@ -71,7 +76,7 @@ class BaseClient {
     var url = Uri.parse(baseUrl + api);
     var _headers = {
       'Authorization': 'Bearer sfie328370428387=',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      'api_key': 'F0v2ilKKIQvJAoEsrnX74h4aylpKuce0',
     };
 
     var response = await client.delete(url, headers: _headers);
@@ -83,20 +88,23 @@ class BaseClient {
     }
   }
 
-  void login(String api, dynamic object) async {
+  Future<dynamic> login(String api, dynamic object) async {
     var url = Uri.parse(baseUrl + api);
     var _payload = json.encode(object);
     var _headers = {
-      'Authorization': 'Bearer sfie328370428387=',
-      'Content-Type': 'application/json',
-      'api_key': 'ief873fj38uf38uf83u839898989',
+      //'Authorization': 'Bearer sfie328370428387=',
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+      //'api_key': 'ief873fj38uf38uf83u839898989',
     };
 
     var response = await client.post(url, body: _payload, headers: _headers);
+
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body.toString());
       print(data['token']);
-      print('Login success!');
+      //print('Login success!');
+      return response.body;
     } else {
       //throw exception and catch it in UI
       throw Exception('Request API error!');

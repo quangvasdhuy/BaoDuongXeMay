@@ -1,9 +1,18 @@
+import 'package:baoduongxe_app/services/base_client.dart';
+import 'package:baoduongxe_app/services/local_notification_service.dart';
+import 'package:baoduongxe_app/ui/login.dart';
 import 'package:baoduongxe_app/ui/popupmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../main.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
+
+var getUser;
+var x_vehicles = [];
+var x_detailNAUs = [];
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -13,6 +22,71 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+  var Users = [];
+
+  Future getData(String api) async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    var response = await http.get(Uri.parse(baseUrl + api));
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      setState(() {
+        Users = jsonResponse;
+      });
+    }
+  }
+  Future getData2(String api) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    var response = await http.get(Uri.parse(baseUrl + api));
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      setState(() {
+        x_vehicles = jsonResponse;
+      });
+    }
+  }
+  Future getData3(String api) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    var response = await http.get(Uri.parse(baseUrl + api));
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      setState(() {
+        x_detailNAUs = jsonResponse;
+      });
+    }
+  }
+
+  late final LocalNotificationService service;
+
+  void listenToNotification() =>
+      service.onNotificationClick.stream.listen(onNoticationListener);
+
+  void onNoticationListener(String? payload) {
+    if (payload != null && payload.isNotEmpty) {
+      print('payload $payload');
+
+    //   Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //           builder: ((context) => SecondScreen(payload: payload))));
+    }
+  }
+
+  @override
+  void initState() {
+    getData('/Users');
+    getData2('/Vehicles');
+    getData3('/DetailNAU');
+
+    service = LocalNotificationService();
+    service.intialize();
+    listenToNotification();
+
+    super.initState();
+  }
+
   aboutAchivements(num, type) {
     return Row(
       children: [
@@ -69,6 +143,11 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   Widget build(BuildContext context) {
+    if (Users.isNotEmpty) {
+      getUser = Users.firstWhere((e) => e["username"] == userNamecon.toString());
+      debugPrint('Login success: '+getUser["username"]+" - "+getUser["userID"].toString());
+    }
+
     return Scaffold(
 
       //bottomNavigationBar: const MyApp(),
@@ -155,8 +234,10 @@ class _MyHomeState extends State<MyHome> {
                         Rect.fromLTRB(0, 0, rect.width, rect.height));
                   },
                   blendMode: BlendMode.dstIn,
-                  child: Image.asset(
-                    'assets/car.png',
+                  child: Image.network(
+                    //'assets/car.png',
+
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKUrXV9aReB-uin5qr5OmicRowt7MUj8NMxpmfAdaZf4ugke3eQQkknfZbBiB_78JH9WE&usqp=CAU",
                     height: 400,
                     width: 500,
                     fit: BoxFit.contain,
@@ -316,8 +397,11 @@ class _MyHomeState extends State<MyHome> {
                                   children: [
                                     IconButton(
                                       color: Colors.white,
-                                      onPressed: (){
-                                        //Navigator.pushNamed(context, 'home');
+                                      onPressed: () async {
+                                        await service.showNotification(
+                                            id: 0,
+                                            title: 'Notification Title',
+                                            body: 'Some body');
                                       },
                                       icon: const Icon(
                                         FontAwesomeIcons.calendar,

@@ -12,21 +12,21 @@ class Vehicle {
     this.vehicleName,
     this.description,
     this.image,
-    this.categoryVehicleName,
+    this.categoryVehicleID,
   });
 
   String? vehicleId;
   String? vehicleName;
   String? description;
   String? image;
-  String? categoryVehicleName;
+  String? categoryVehicleID;
 
   factory Vehicle.fromJson(Map<String, dynamic> json) => Vehicle(
         vehicleId: json["vehicleId"],
         vehicleName: json["vehicleName"],
         description: json["description"],
         image: json["image"],
-        categoryVehicleName: json["categoryVehicleName"],
+        categoryVehicleID: json["categoryVehicleName"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +34,6 @@ class Vehicle {
         "vehicleName": vehicleName,
         "description": description,
         "image": image,
-        "categoryVehicleName": categoryVehicleName,
+        "categoryVehicleName": categoryVehicleID,
       };
 }
